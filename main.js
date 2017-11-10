@@ -100,7 +100,7 @@
 
 		// disable scroll on touch devices
 		var preventDefault = function(e) {
-			if (document.querySelector('.askpermission') !== null) e.preventDefault();
+			if (askpermission === true) e.preventDefault();
 		}
 		window.addEventListener('touchstart', preventDefault);
 		window.addEventListener('touchmove', preventDefault);
@@ -658,6 +658,7 @@
 			initSun();
 
 			askpermission.parentElement.removeChild(askpermission);
+			askpermission = true;
 			canvas.classList.remove('hidden');
 		} else if (navigator.geolocation) {
 			askpermission.classList.remove('hidden');
@@ -696,6 +697,7 @@
 
 		askpermission.classList.add('hidden');
 		askpermission.parentElement.removeChild(askpermission);
+		askpermission = true;
 		canvas.classList.remove('hidden');
 
 		initSun();
