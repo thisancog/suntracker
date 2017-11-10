@@ -99,8 +99,11 @@
 		window.addEventListener('deviceorientation', saveAlphas);
 
 		// disable scroll on touch devices
-		window.addEventListener('touchstart', function(e) { e.preventDefault(); }, false);
-		window.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+		var preventDefault = function(e) {
+			if (geo.latitude !== null) e.preventDefault();
+		}
+		window.addEventListener('touchstart', preventDefault);
+		window.addEventListener('touchmove', preventDefault);
 	}
 
 	// Initialise system and repeat
