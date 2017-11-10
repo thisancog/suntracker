@@ -213,7 +213,7 @@
 
 			x = constrain(x, 0, canvas.width);
 			y = constrain(y, 0, canvas.height);
-			opacity = mapValue(Math.sin(opacity), -1, 1, 0.3, 1);
+			opacity = mapValue(Math.sin(opacity), -1, 1, 0.3, 0.7);
 
 			ctx.beginPath();
 			ctx.arc(x, y, 2, 0, 2 * Math.PI);
