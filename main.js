@@ -97,8 +97,6 @@
 
 		window.addEventListener('deviceorientation', getDeviceOrientation);
 		window.addEventListener('deviceorientation', saveAlphas);
-
-		window.scroll = null;
 	}
 
 	// Initialise system and repeat
@@ -301,6 +299,8 @@
 	}
 
 	var canvasHover = function(e) {
+		e.preventDefault();
+		
 		if (sun.dragged) {
 			var mousePos = getMousePosition(e);
 
