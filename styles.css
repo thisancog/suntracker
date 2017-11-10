@@ -55,6 +55,11 @@ body {
 	transform: translate(-50%, -50%);
 }
 
+.askpermission {
+	width: 400px;
+	max-width: calc(100vw - 2rem);
+}
+
 .askpermission p {
 	font-size: 1.25rem;
 }
