@@ -100,7 +100,7 @@
 
 		// disable scroll on touch devices
 		var preventDefault = function(e) {
-			if (geo.latitude !== null) e.preventDefault();
+			if (!askpermission) e.preventDefault();
 		}
 		window.addEventListener('touchstart', preventDefault);
 		window.addEventListener('touchmove', preventDefault);
