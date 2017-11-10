@@ -97,6 +97,8 @@
 
 		window.addEventListener('deviceorientation', getDeviceOrientation);
 		window.addEventListener('deviceorientation', saveAlphas);
+
+		window.scroll = null;
 	}
 
 	// Initialise system and repeat
@@ -284,7 +286,7 @@
 
 
 	var drawInfos = function() {
-		infos.innerHTML = 'Sun elevation: ' + sun.elevation + '<br/>Sun azimuth: ' + sun.azimuth + '<br/><br/>Long: ' + geo.longitude + '<br/>Lat: ' + geo.latitude + '<br/><br/>Compass direction: ' + geo.cardinalOrientation + '<br/>geolocation allowed: ' + geo.geolocationAllowed + '<br/>GPS difference: ' + geo.gpsDifference + '<br/>compass method: ' + geo.compassMethod;
+		infos.innerHTML = 'Sun elevation: ' + sun.elevation + '<brs/>Sun azimuth: ' + sun.azimuth + '<br/><br/>Long: ' + geo.longitude + '<br/>Lat: ' + geo.latitude + '<br/><br/>Compass direction: ' + geo.cardinalOrientation + '<br/>geolocation allowed: ' + geo.geolocationAllowed + '<br/>GPS difference: ' + geo.gpsDifference + '<br/>compass method: ' + geo.compassMethod;
 	}
 
 	var canvasDown = function(e) {
