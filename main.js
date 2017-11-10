@@ -87,7 +87,7 @@
 		canvas.addEventListener('touchstart', canvasDown);
 
 		canvas.addEventListener('mousemove', canvasHover)
-		canvas.addEventListener('touchmove', canvasHover)
+		canvas.addEventListener('touchmove', canvasHover);
 
 		canvas.addEventListener('mouseup', canvasUp);
 		canvas.addEventListener('touchend', canvasUp);
@@ -97,6 +97,10 @@
 
 		window.addEventListener('deviceorientation', getDeviceOrientation);
 		window.addEventListener('deviceorientation', saveAlphas);
+
+		// disable scroll on touch devices
+		window.addEventListener('touchstart', function(e) { e.preventDefault(); }, false);
+		window.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
 	}
 
 	// Initialise system and repeat
@@ -288,7 +292,6 @@
 	}
 
 	var canvasDown = function(e) {
-		e.preventDefault();
 		sun.dragged = isSunHover(e);
 
 		if (sun.dragged) {
@@ -300,8 +303,6 @@
 	}
 
 	var canvasHover = function(e) {
-		e.preventDefault();
-
 		if (sun.dragged) {
 			var mousePos = getMousePosition(e);
 
