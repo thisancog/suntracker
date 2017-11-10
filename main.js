@@ -202,9 +202,15 @@
 			return x - Math.floor(x);
 		}
 
+		var now = new Date(),
+			timestamp = (now.getSeconds() + 60 * (now.getMinutes() + 60 * (now.getHours()))) / (24 * 60 * 60);
+
 		for (var i = 0; i < geo.numStars; i++) {
-			var x = seededRand(i * canvas.width + 1) * canvas.width,
-				y = seededRand(i * canvas.height + 1) * canvas.height;
+			var x = Math.floor((seededRand(i * canvas.width + 1) + timestamp) * canvas.width),
+				y = Math.floor((seededRand(i * canvas.height + 1) + timestamp) * canvas.height);
+
+			x = constrain(x, 0, canvas.width);
+			y = constrain(y, 0, canvas.height);
 
 			ctx.beginPath();
 			ctx.arc(x, y, 2, 0, 2 * Math.PI);
@@ -252,11 +258,7 @@
 		}
 
 		if (geo.cardinalOrientation !== null) {
-			newX = geo.cardinalOrientation - newX;
-
-			while (newX < 0)   { newX += 360; }
-			while (newX > 360) { newX -= 360; };
-
+			newX = constrain(geo.cardinalOrientation - newX, 0, 360);
 			newX = mapValue(newX, 0, 360, canvas.width, 0);
 		}
 
@@ -446,11 +448,7 @@
 			equationTime = getEquationOfTime(julianCentury);
 
 		var solarTimeFix = equationTime + 4 * geo.longitude + 60 * zone,
-			solarTime = hours * 60 + minutes + seconds / 60 + solarTimeFix;
-
-		while (solarTime > 1440) {
-			solarTime -= 1440;
-		}
+			solarTime = constrain(hours * 60 + minutes + seconds / 60 + solarTimeFix, 0, 1440);
 
 
 		// Calculate solar zenith and azimuth for current time
@@ -518,10 +516,7 @@
 		var solarNoonOffset = 720 - 4 * geo.longitude - equationTime,
 			julianCenturyOffset = getJulianCentury(julianDay + solarNoonOffset / 1440),
 			equationTimeOffset = getEquationOfTime(julianCenturyOffset),
-			solarNoonLocal = 720 - 4 * geo.longitude - equationTimeOffset;
-
-		while (solarNoonLocal < 0) {		solarNoonLocal += 1440; }
-		while (solarNoonLocal >= 1440) {	solarNoonLocal -= 1440; }
+			solarNoonLocal = constrain(720 - 4 * geo.longitude - equationTimeOffset, 0, 1440);
 
 		var solarNoon = date || new Date(),
 			solarNoonHours = Math.floor(solarNoonLocal / 60),
@@ -626,12 +621,7 @@
 	}
 
 	var getSolarGeometricMeanLongitude = function(julianCentury) {
-		var L0 = 280.46646 + julianCentury * (36000.76983 + 0.0003032 * julianCentury);
-
-		while (L0 > 360) {	L0 -= 360; }
-		while (L0 < 0) {	L0 += 360; }
-
-		return L0;
+		return constrain(280.46646 + julianCentury * (36000.76983 + 0.0003032 * julianCentury), 0, 360);
 	}
 
 	var getEquationOfTime = function(julianCentury) {
@@ -723,21 +713,13 @@
 		initSun();
 	}
 
-
-	var getCompassHeading = function() {
-		
-	}
-
 	var getDeviceOrientation = function(event) {
 		if (event.hasOwnProperty('webkitCompassHeading')) {
 			geo.compassMethod = 'webkitCompass';
 			geo.cardinalOrientation = Math.round(event.webkitCompassHeading);
 		} else if (geo.geolocationAllowed) {
 			geo.compassMethod = 'GPS';
-			var degrees = - event.alpha - geo.gpsDifference;
-			if (degrees < 0)			degrees += 360;
-			else if (degrees > 360)		degrees -= 360;
-			geo.cardinalOrientation = Math.round(degrees);
+			geo.cardinalOrientation = Math.round(constrain(- event.alpha - geo.gpsDifference, 0, 360));
 		}
 	}
 
@@ -760,6 +742,15 @@
 		} else {
 			geo.headings = []
 		}
+	}
+	
+	var constrain = function(value, min, max) {
+		if (value >= min && value <= max) return value;
+
+		while (value > max) { value -= max - min; }
+		while (value < min) { value += max - min; }
+
+		return value;
 	}
 
 	var mapValue = function(value, minOld, maxOld, minNew, maxNew) {
