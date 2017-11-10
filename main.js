@@ -288,6 +288,7 @@
 	}
 
 	var canvasDown = function(e) {
+		e.preventDefault();
 		sun.dragged = isSunHover(e);
 
 		if (sun.dragged) {
@@ -300,7 +301,7 @@
 
 	var canvasHover = function(e) {
 		e.preventDefault();
-		
+
 		if (sun.dragged) {
 			var mousePos = getMousePosition(e);
 
