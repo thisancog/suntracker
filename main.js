@@ -113,6 +113,7 @@
 
 		findColors();
 		drawSky();
+		drawStars();
 		drawSun();
 
 		if (debug)
@@ -191,6 +192,25 @@
 		ctx.rect(0, 0, canvas.width, canvas.height);
 		ctx.fillStyle = gradient;
 		ctx.fill();
+	}
+	
+	var drawStars = function() {
+		if (sun.y < canvas.height + 2 * sun.radius) return;
+
+		var seededRand = function(seed) {
+			var x = Math.sin(seed) * seed * 10000;
+			return x - Math.floor(x);
+		}
+
+		for (var i = 0; i < geo.numStars; i++) {
+			var x = seededRand(i * canvas.width + 1) * canvas.width,
+				y = seededRand(i * canvas.height + 1) * canvas.height;
+
+			ctx.beginPath();
+			ctx.arc(x, y, 2, 0, 2 * Math.PI);
+			ctx.fillStyle = 'rgba(255, 255, 50, 0.3)';
+			ctx.fill();
+		}
 	}
 
 
