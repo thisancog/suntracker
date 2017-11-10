@@ -49,6 +49,7 @@
 			gpsDifference: 0,
 			compassMethod: null,
 			cardinalOrientation: null,
+			numStars: 200
 		},
 		sun = {
 			relativeSize: 0.06,
