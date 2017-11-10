@@ -100,7 +100,7 @@
 
 		// disable scroll on touch devices
 		var preventDefault = function(e) {
-			if (!askpermission) e.preventDefault();
+			if (document.querySelector('.askpermission') !== null) e.preventDefault();
 		}
 		window.addEventListener('touchstart', preventDefault);
 		window.addEventListener('touchmove', preventDefault);
