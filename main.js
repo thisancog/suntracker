@@ -667,7 +667,7 @@
 	}
 
 	var ipGeolocation = function() {
-		fetch('http://freegeoip.net/json/', { method: 'GET' }).then(function(response) {
+		fetch('https://freegeoip.net/json/', { method: 'GET' }).then(function(response) {
 			return response.json();
 		}).then(function(data) {
 			saveGeoData(data);
