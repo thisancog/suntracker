@@ -1,0 +1,90 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+html, body {
+	width: 100vw;
+	height: 100vh;
+	font-size: 18px;
+	line-height: 1.6;
+}
+
+body {
+	color: #FFFFFF;
+	background-color: #2DB1E5;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;	
+}
+
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.sun,
+.askpermission  {
+	opacity: 1;
+	-webkit-transition: opacity 1s ease;
+	   -moz-transition: opacity 1s ease;
+	     -o-transition: opacity 1s ease;
+	        transition: opacity 1s ease;
+}
+
+.sun.sunhover {
+	cursor: pointer;
+}
+
+.sun.hidden,
+.askpermission.hidden {
+	opacity: 0;
+}
+
+.askpermission,
+.infos {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.askpermission p {
+	font-size: 1.25rem;
+}
+
+.askpermission .buttons {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 3.2rem;
+}
+
+.askpermission input {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 1rem;
+	color: #EEE;
+
+	padding: 0.4rem 0.75rem;
+	border: 1px solid #EEE;
+	border-radius: 0.3rem;
+	background: transparent;
+	cursor: pointer;
+
+	-webkit-transition: all 0.3s ease;
+	   -moz-transition: all 0.3s ease;
+	     -o-transition: all 0.3s ease;
+	        transition: all 0.3s ease;
+}
+
+.askpermission input:hover,
+.askpermission input:focus {
+	border-color: #FFF;
+	color: #FFF;
+	outline: none;
+}

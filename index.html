@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="de-DE" class="no-js">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sun</title>
+	<link rel="stylesheet" href="styles.css" />
+	<script>
+		var html = document.getElementsByClassName('no-js');
+		for (var i = 0; i < html.length; i++) { html[i].className = 'js'; }
+	</script>
+	<script type="text/javascript" src="main.js" async></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<canvas class="sun hidden" width="1200" height="1200"></canvas>
+		<form class="askpermission hidden">
+			<p>
+				To calculate the sun&rsquo;s current position,<br/>we&rsquo;d like to know where you are located at.<br/>
+				Please allow geolocation.
+			</p>
+
+			<div class="buttons">
+				<input type="button" class="agree" value="Okay!">
+				<input type="button" class="disagree" value="Please don't.">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
