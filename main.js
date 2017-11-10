@@ -208,14 +208,16 @@
 
 		for (var i = 0; i < geo.numStars; i++) {
 			var x = Math.floor((seededRand(i * canvas.width + 1) + timestamp) * canvas.width),
-				y = Math.floor((seededRand(i * canvas.height + 1) + timestamp) * canvas.height);
+				y = Math.floor((seededRand(i * canvas.height + 1) + timestamp) * canvas.height),
+				opacity = (timestamp * 24 * 60 * 60 + 20 * i / geo.numStars + now.getMilliseconds() / 1000);
 
 			x = constrain(x, 0, canvas.width);
 			y = constrain(y, 0, canvas.height);
+			opacity = mapValue(Math.sin(opacity), -1, 1, 0.3, 1);
 
 			ctx.beginPath();
 			ctx.arc(x, y, 2, 0, 2 * Math.PI);
-			ctx.fillStyle = 'rgba(255, 255, 50, 0.3)';
+			ctx.fillStyle = 'rgba(255, 255, 50, ' + opacity + ')';
 			ctx.fill();
 		}
 	}
